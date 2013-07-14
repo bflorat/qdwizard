@@ -21,7 +21,6 @@
       <roles>
         <role>Project Manager</role>
         <role>Developer</role>
-        <organization>The QDWizard Team</organization>
       </roles>
       <timezone>+2</timezone>
     </developer>
@@ -31,7 +30,6 @@
       <roles>
         <role>Project Manager</role>
         <role>Developer</role>
-        <organization>The QDWizard Team</organization>
       </roles>
       <timezone>+2</timezone>
     </developer>
@@ -40,7 +38,6 @@
       <name>Jonks</name>
       <roles>
         <role>Developer</role>
-        <organization>The QDWizard Team</organization>
       </roles>
     </developer>
   </developers>
