@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?><project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.qdwizard</groupId>
+  <artifactId>qdwizard</artifactId>
+  <name>QDWizard</name>
+  <packaging>jar</packaging>
+  <version>3.0</version>
+  <url>http://github.com/bflorat/qdwizard</url> 
+  <licenses>
+    <license>
+      <name>GNU Lesser General Public License, version 2.1</name>
+      <url>http://www.gnu.org/licenses/lgpl-2.1.html</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <description>QDWizard is a dead simple API for creating complex Swing wizards</description>
+  <developers>
+    <developer>
+      <id>bflorat</id>
+      <name>Bertrand Florat</name>
+      <roles>
+        <role>Project Manager</role>
+        <role>Developer</role>
+        <organization>The QDWizard Team</organization>
+      </roles>
+      <timezone>+2</timezone>
+    </developer>
+    <developer>
+      <id>maiapopa</id>
+      <name>Ana Oleski</name>
+      <roles>
+        <role>Project Manager</role>
+        <role>Developer</role>
+        <organization>The QDWizard Team</organization>
+      </roles>
+      <timezone>+2</timezone>
+    </developer>
+    <developer>
+      <id>jonks</id>
+      <name>Jonks</name>
+      <roles>
+        <role>Developer</role>
+        <organization>The QDWizard Team</organization>
+      </roles>
+    </developer>
+  </developers>
+  <scm>
+	<connection>scm:git:git://github.com/bflorat/qdwizard.git</connection>
+	<developerConnection>scm:git:git@github.com:bflorat/qdwizard.git</developerConnection>
+	<url>http://github.com/bflorat/qdwizard</url>
+  </scm>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.5</source>
+          <target>1.5</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.4</version>
+    </dependency>
+  </dependencies>
+  <reporting>
+    <plugins>
+      <plugin>
+        <artifactId>maven-javadoc-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>jxr-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <artifactId>maven-pmd-plugin</artifactId>
+        <configuration>
+          <sourceEncoding>utf-8</sourceEncoding>
+          <minimumTokens>100</minimumTokens>
+          <targetJdk>1.5</targetJdk>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>taglist-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <artifactId>maven-clover-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </reporting>
+  
+  <distributionManagement>
+   <site>
+      <id>qdwizard.sf.net</id>
+      <url>scp://shell.sourceforge.net:/home/groups/q/qd/qdwizard/htdocs</url>
+    </site>
+   <repository>
+    <id>qdwizard.sf.net</id>
+    <name>Sourceforge Server</name>
+    <url>scp://shell.sourceforge.net:/home/groups/q/qd/qdwizard/htdocs/repository</url>
+   </repository>
+ </distributionManagement>
+</project>
