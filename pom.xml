@@ -13,7 +13,7 @@
       <distribution>repo</distribution>
     </license>
   </licenses>
-  <description>QDWizard is a dead simple API for creating complex Swing wizards</description>
+  <description>QDWizard is a dead simple API for creating Swing wizards</description>
   <developers>
     <developer>
       <id>bflorat</id>
@@ -93,16 +93,4 @@
       </plugin>
     </plugins>
   </reporting>
-  
-  <distributionManagement>
-   <site>
-      <id>qdwizard.sf.net</id>
-      <url>scp://shell.sourceforge.net:/home/groups/q/qd/qdwizard/htdocs</url>
-    </site>
-   <repository>
-    <id>qdwizard.sf.net</id>
-    <name>Sourceforge Server</name>
-    <url>scp://shell.sourceforge.net:/home/groups/q/qd/qdwizard/htdocs/repository</url>
-   </repository>
- </distributionManagement>
 </project>
