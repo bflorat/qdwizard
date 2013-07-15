@@ -2,9 +2,8 @@
 QDWizard is a dead simple API for creating Swing wizards with a learning curve of less than 15 minutes.
 QDWizard is released under the [LGPL V2.1](http://www.gnu.org/licenses/lgpl-2.1.html) license
 
-![](http://github.com/bflorat/qdwizard/blob/master/qdwizard.jpeg)
+![](https://github.com/bflorat/qdwizard/blob/master/qdwizard.jpeg)
 
-----
 # Features
 * Designed to minimize required code. Only few methods to implement.
 * Simple design, only two classes visible by the programmer
@@ -18,13 +17,10 @@ QDWizard is released under the [LGPL V2.1](http://www.gnu.org/licenses/lgpl-2.1.
 * Learning curve of 15 minutes maximum
 * Real world samples provided, see [jajuk classes](http://gitorious.org/jajuk/jajuk/blobs/master/jajuk/src/main/java/org/jajuk/ui/wizard/DigitalDJWizard.java)
 
-----
 
 #Requirements
 * To use QDWizard, just add the qdwizard-release.jar to your CLASSPATH
 * JRE 1.5 and above
-
-----
 
 #Manual
 
@@ -38,7 +34,8 @@ QDWizard is released under the [LGPL V2.1](http://www.gnu.org/licenses/lgpl-2.1.
 * Create a class that extends Wizard. You have to implement getPreviousScreen(), getNextScreen() and finish() abstract methods.
 * Displaying the wizard (only the arguments of the Builder class are mandatory, others methods like icon() are optional):
 ````java
-MyWizard wizard = new Wizard(new Wizard.Builder("wizard name", ActionSelectionPanel.class,window).hSize(600).vSize(500).locale(LocaleManager.getLocale()).icon(anIcon));
+MyWizard wizard = new Wizard(new Wizard.Builder("wizard name", ActionSelectionPanel.class,window)
+   .hSize(600).vSize(500).locale(LocaleManager.getLocale()).icon(anIcon));
 wizard.show();
 ````
 
@@ -85,7 +82,6 @@ public Class getNextScreen(Class screen) {
 ##Samples
 Have a look at [the Jajuk DJ wizard](http://gitorious.org/jajuk/jajuk/blobs/master/jajuk/src/main/java/org/jajuk/ui/wizard/DigitalDJWizard.java)
 
--------
 # History
     2013/07/14: [3.0] (backward compatibility broken) 
         Builder pattern to build a wizard to make the instantiation much easier and cleaner
