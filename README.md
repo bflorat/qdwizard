@@ -23,20 +23,18 @@ QDWizard is released under the [LGPL V2.1](http://www.gnu.org/licenses/lgpl-2.1.
 * JRE 1.5 and above
 
 #Manual
-
 ## Concepts
 * A wizard is build of several screens.
 * Previous and next screens decision is taken by the wizard class.
 * Wizard data is stored in a map named 'data'. It is accessible from Wizard and Screen class. Store and get options selected by the user here.
 
 ### Wizard creation
-
 * Create a class that extends Wizard. You have to implement getPreviousScreen(), getNextScreen() and finish() abstract methods.
 * Displaying the wizard (only the arguments of the Builder class are mandatory, others methods like icon() are optional):
 ````java
 MyWizard wizard = new Wizard(new Wizard.Builder("wizard name", ActionSelectionPanel.class,window)
-   .hSize(600).vSize(500).locale(LocaleManager.getLocale()).icon(anIcon).headerBackgroundImage(backgroundImage)
-   .leftSideImage(leftSideImage));
+   .hSize(600).vSize(500).locale(LocaleManager.getLocale()).icon(anIcon)
+   .headerBackgroundImage(backgroundImage).leftSideImage(leftSideImage));
 wizard.show();
 ````
 
