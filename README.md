@@ -2,7 +2,7 @@
 QDWizard is a dead simple API for creating Swing wizards with a learning curve of less than 15 minutes.
 QDWizard is released under the [LGPL V2.1](http://www.gnu.org/licenses/lgpl-2.1.html) license
 
-![](https://github.com/bflorat/qdwizard/blob/master/qdwizard.jpeg)
+![](qdwizard.jpeg)
 
 # Features
 * Designed to minimize required code. Only few methods to implement.
@@ -35,7 +35,8 @@ QDWizard is released under the [LGPL V2.1](http://www.gnu.org/licenses/lgpl-2.1.
 * Displaying the wizard (only the arguments of the Builder class are mandatory, others methods like icon() are optional):
 ````java
 MyWizard wizard = new Wizard(new Wizard.Builder("wizard name", ActionSelectionPanel.class,window)
-   .hSize(600).vSize(500).locale(LocaleManager.getLocale()).icon(anIcon));
+   .hSize(600).vSize(500).locale(LocaleManager.getLocale()).icon(anIcon).headerBackgroundImage(backgroundImage)
+   .leftSideImage(leftSideImage));
 wizard.show();
 ````
 
