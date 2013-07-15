@@ -175,7 +175,7 @@ public abstract class Wizard extends WindowAdapter implements ActionListener {
     }
 
     /**
-     * Set the locale
+     * Set the locale. If provided locale is not supported, English is used.
      * @param locale locale (language) of the wizard
      * @return the wizard builder
      */
@@ -195,7 +195,7 @@ public abstract class Wizard extends WindowAdapter implements ActionListener {
     }
 
     /**
-     * Set the horizontal size
+     * Set the horizontal size. Default is 700.
      * @param horizontalSize horizontal size in pixel of the wizard
      * @return the wizard builder
      */
@@ -205,7 +205,7 @@ public abstract class Wizard extends WindowAdapter implements ActionListener {
     }
 
     /**
-     * Set the vertical padding
+     * Set the vertical padding. Default is 500.
      * @param layoutVPadding vertical padding in pixel between header and body
      * @return the wizard builder
      */
