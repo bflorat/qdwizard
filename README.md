@@ -81,6 +81,9 @@ public Class getNextScreen(Class screen) {
 ##Samples
 Have a look at [the Jajuk DJ wizard](http://gitorious.org/jajuk/jajuk/blobs/master/jajuk/src/main/java/org/jajuk/ui/wizard/DigitalDJWizard.java)
 
+##Javadoc
+Check http://bflorat.github.io/qdwizard/apidocs/
+
 # History
     2013/07/14: [3.0] (backward compatibility broken) 
         Builder pattern to build a wizard to make the instantiation much easier and cleaner
