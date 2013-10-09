@@ -65,15 +65,15 @@ import javax.swing.WindowConstants;
  * screen class. Example:</li>
  * <pre>{@code
  * public Class getNextScreen(Class screen) {
- * if (ActionSelectionPanel.class.equals(getCurrentScreen())) {
- * String sAction = (String) data.get(KEY_ACTION);
- * if (ActionSelectionPanel.ACTION_CREATION.equals(sAction)) {
- * return TypeSelectionPanel.class;
- * } else if (ActionSelectionPanel.ACTION_DELETE.equals(sAction)) {
- * return RemovePanel.class;
- * }
- * }
- * }
+ *   if (ActionSelectionPanel.class.equals(getCurrentScreen())) {
+ *     String sAction = (String) data.get(KEY_ACTION);
+ *     if (ActionSelectionPanel.ACTION_CREATION.equals(sAction)) {
+ *       return TypeSelectionPanel.class;
+ *     } 
+ *     else if (ActionSelectionPanel.ACTION_DELETE.equals(sAction)) {
+ *       return RemovePanel.class;
+ *     }
+ *   }
  * }
  * </pre>
  * 
@@ -440,11 +440,11 @@ public abstract class Wizard extends WindowAdapter implements ActionListener {
   }
 
   /**
-   * Gets the previous screen.
+   * Gets the previous screen class.
    * 
-   * @param screen 
+   * @param screen reference screen for which we want the previous screen class.
    * 
-   * @return previous screen class
+   * @return previous screen class relatively to <code>screen</code> or null if there is no screen before <code>screen</code>.
    */
   abstract public Class<? extends Screen> getPreviousScreen(Class<? extends Screen> screen);
 
@@ -456,11 +456,11 @@ public abstract class Wizard extends WindowAdapter implements ActionListener {
   }
 
   /**
-   * Gets the next screen.
+   * Gets the next screen class.
    * 
-   * @param screen 
+   * @param screen reference screen for which we want the next screen class.
    * 
-   * @return next screen class
+   * @return next screen class relatively to <code>screen</code> or null if there is no screen after <code>screen</code>.
    */
   abstract public Class<? extends Screen> getNextScreen(Class<? extends Screen> screen);
 
