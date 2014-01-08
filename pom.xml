@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><project>
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.qdwizard</groupId>
+  <groupId>net.sf.qdwizard</groupId>
   <artifactId>qdwizard</artifactId>
   <name>QDWizard</name>
   <packaging>jar</packaging>
