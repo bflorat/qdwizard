@@ -4,6 +4,9 @@ QDWizard is released under the [LGPL V2.1](http://www.gnu.org/licenses/lgpl-2.1.
 
 ![](qdwizard.jpeg)
 
+# Download
+* Zipped source, javadoc and jar are available from the [Maven central repository](http://search.maven.org/#search|ga|1|a%3A%22qdwizard%22)
+
 # Features
 * Designed to minimize required code. Only few methods to implement.
 * Simple design, only two classes visible by the programmer
