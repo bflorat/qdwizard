@@ -88,6 +88,8 @@ Have a look at [the Jajuk DJ wizard](http://gitorious.org/jajuk/jajuk/blobs/mast
 Check http://bflorat.github.io/qdwizard/apidocs/
 
 # History
+    2014/03/25: [3.1.1]  
+        Fixes a regression on the clearpoint annotation that has been broken in 3.1
     2014/03/25: [3.1] (backward compatibility slightly broken) 
         ClearPoint interface is now an annotation
     2013/07/14: [3.0] (backward compatibility broken) 

@@ -333,7 +333,7 @@ public abstract class Wizard extends WindowAdapter implements ActionListener {
   private void setScreen(Class<? extends Screen> screenClass) {
     Screen screen = null;
     // If the class is an clear point, we clean up all previous screens
-    if (Arrays.asList(screenClass.getInterfaces()).contains(ClearPoint.class)) {
+    if (screenClass.isAnnotationPresent(ClearPoint.class)) {
       resetScreens();
     }
     // Try to get a screen from buffer or create it if needed
