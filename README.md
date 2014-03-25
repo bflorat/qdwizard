@@ -77,7 +77,7 @@ public Class getNextScreen(Class screen) {
 * Set errors using the setProblem(String) method. The error will be displayed in red to the user at the bottom of the screen. When error is fixed, use a setProblem(null).
 * Get and set wizard data using the 'data' map available from wizard and screen classes.
 * Use setCanFinish(true) method in a screen to set the fact that the screen is the last one (user can click on Finish button).
-* By default, QDwizard keeps screens into memory so user can go previous or next and keep typed values. If you want to clear this cache, just make your screen(s) implement ClearPoint interface. When user will reach a screen that implements this interface, cache is cleaned up.
+* By default, QDwizard keeps screens into memory so user can go previous or next and keep typed values. If you want to clear this cache, use the ClearPoint annotation against your screen(s) classes. When user reaches a screen that use this annotation, cache is cleaned up.
 * The Screen class contains two empty methods onEnter() and onLeave() which are called by the wizard on entering and respectively before leaving the screen. You can override them if you want your screens to be notified on enter or leave. Note that this happens only in forward mode, which means onEnter won't be called when you return to a screen via the previous button and onLeave won't be called when you leave the screen via the previous button.
 * You can implement a cancel() method in your wizard, which will be called when the user presses the Cancel button.
 
@@ -88,6 +88,8 @@ Have a look at [the Jajuk DJ wizard](http://gitorious.org/jajuk/jajuk/blobs/mast
 Check http://bflorat.github.io/qdwizard/apidocs/
 
 # History
+    2014/03/25: [3.1] (backward compatibility slightly broken) 
+        ClearPoint interface is now an annotation
     2013/07/14: [3.0] (backward compatibility broken) 
         Builder pattern to build a wizard to make the instantiation much easier and cleaner
         Moved the project to GitHub

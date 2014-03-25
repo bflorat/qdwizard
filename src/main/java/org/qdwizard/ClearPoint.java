@@ -19,11 +19,18 @@
  */
 package org.qdwizard;
 
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
 /**
  * Screens needing to clear wizard cache (values filled up in different screens)
- * should implement this interface.
+ * should use this annotation.
  * 
  * @author Bertrand Florat
  */
-public interface ClearPoint {
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface ClearPoint {
 }
