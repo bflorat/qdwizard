@@ -22,7 +22,7 @@ QDWizard is released under the [LGPL V2.1](http://www.gnu.org/licenses/lgpl-2.1.
 
 
 #Requirements
-* To use QDWizard, just add the qdwizard-<release>.jar to your CLASSPATH
+* To use QDWizard, just add the qdwizard-[release].jar to your CLASSPATH
 * JRE 1.5 and above
 
 #Manual
