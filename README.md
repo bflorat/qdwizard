@@ -10,7 +10,7 @@ QDWizard is released under the [LGPL V2.1](http://www.gnu.org/licenses/lgpl-2.1.
 # Features
 * Designed to minimize required code. Only few methods to implement.
 * Simple design, only two classes visible by the programmer
-* Maven powered : QDWizard is available from Maven central repository as artefact (org.qdwizard:qdwizard)
+* Maven powered : QDWizard is available from Maven central repository as artefact (net.sf.qdwizard:qdwizard)
 * I18n support for action buttons (see [this class](https://github.com/bflorat/qdwizard/blob/master/src/main/java/org/qdwizard/Langpack.java) to get the list of supported languages)
 * Full branching support, can implement any wizard cinematic
 * Error management using the simple setProblem() method
@@ -22,13 +22,13 @@ QDWizard is released under the [LGPL V2.1](http://www.gnu.org/licenses/lgpl-2.1.
 
 
 #Requirements
-* To use QDWizard, just add the qdwizard-release.jar to your CLASSPATH
+* To use QDWizard, just add the qdwizard-<release>.jar to your CLASSPATH
 * JRE 1.5 and above
 
 #Manual
 ## Concepts
-* A wizard is build of several screens.
-* Previous and next screens decision is taken by the wizard class.
+* A wizard is build of several screens
+* Previous and next screens decision is taken by the wizard class
 * Wizard data is stored in a map named 'data'. It is accessible from Wizard and Screen class. Store and get options selected by the user here.
 
 ### Wizard creation
