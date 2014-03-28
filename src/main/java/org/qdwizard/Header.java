@@ -35,9 +35,6 @@ import javax.swing.JPanel;
  * Contains a wizard title, a subtitle used to display the name of the current
  * screen and an optional background image
  * </p>.
- * 
- * @author Bertrand Florat
- * @created 1 may 2006
  */
 @SuppressWarnings("serial")
 class Header extends JPanel {

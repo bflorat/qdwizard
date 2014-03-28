@@ -27,8 +27,6 @@ import java.lang.annotation.Target;
 /**
  * Screens needing to clear wizard cache (values filled up in different screens)
  * should use this annotation.
- * 
- * @author Bertrand Florat
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
