@@ -41,7 +41,7 @@ public abstract class Screen extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private final ScreenState state;
 	/** Data is shared with wizard scope */
-	public Map<String, Object> data;
+	public Map<Object, Object> data;
 	private Wizard wizard;
 	private String description;
 

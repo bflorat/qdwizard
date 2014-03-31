@@ -73,9 +73,27 @@ public Class getNextScreen(Class screen) {
 * getName() method should return the step name and getDescription() the step description (return null if no description needed).
 * initUI() method contains graphical code for your screen. This method is automatically called from screen constructor so don't call it by yourself.
 
+### Data sharing between screens and wizard
+Get and set wizard data using the 'data' map available from wizard and screen classes. This is a HashMap<Object,Object> so you can use anything as a key. A good practice is to create an enum in the Wizard class and use to enum entry as key for the data map :
+````java
+public Class MyWizard extends Wizard {
+	enum VARIABLES {VARIABLE_1,VARIABLE_2}
+	...
+	void someMethod(){
+		data.put(VARIABLES.VARIABLE1,"a fine example String");
+	}
+}
+
+public Class MyScreen extends Screen {
+	void someMethod(){
+		String var1 = data.get(VARIABLE_1);
+	}
+}
+````
+
 ## General use
+* It is a good practice to create wizards and their associated screens in the same package. It's also better to implement screens in different java files.
 * Set errors using the setProblem(String) method. The error will be displayed in red to the user at the bottom of the screen. When error is fixed, use a setProblem(null).
-* Get and set wizard data using the 'data' map available from wizard and screen classes.
 * Use setCanFinish(true) method in a screen to set the fact that the screen is the last one (user can click on Finish button).
 * By default, QDwizard keeps screens into memory so user can go previous or next and keep typed values. If you want to clear this cache, use the ClearPoint annotation against your screen(s) classes. When user reaches a screen that use this annotation, cache is cleaned up.
 * The Screen class contains two empty methods onEnter() and onLeave() which are called by the wizard on entering and respectively before leaving the screen. You can override them if you want your screens to be notified on enter or leave. Note that this happens only in forward mode, which means onEnter won't be called when you return to a screen via the previous button and onLeave won't be called when you leave the screen via the previous button.
@@ -89,6 +107,7 @@ Check http://bflorat.github.io/qdwizard/apidocs/
 
 # History
     2014/03/28: [3.1.2]
+    	   data is now a HashMap<Object,Object>, no more a HashMap<String,Object> to allow using enums as data entries
     	   Code and javadoc cleanup  
     2014/03/25: [3.1.1]  
         Fixes a regression on the clearpoint annotation that has been broken in 3.1
