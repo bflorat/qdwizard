@@ -342,7 +342,7 @@ public abstract class Wizard extends WindowAdapter implements ActionListener {
 	 * @param screenClass
 	 *            screen class to set
 	 */
-	private void setScreen(Class<? extends Screen> screenClass) {
+	private void setScreen(Class<? extends Screen> screenClass) throws IllegalArgumentException {
 		Screen screen = null;
 		// If the class is an clear point, we clean up all previous screens
 		if (screenClass.isAnnotationPresent(ClearPoint.class)) {
@@ -356,10 +356,10 @@ public abstract class Wizard extends WindowAdapter implements ActionListener {
 				screen = screenClass.newInstance();
 			} catch (InstantiationException e) {
 				logger.log(Level.SEVERE, "Cannot instanciate the screen", e);
-				return;
+				throw new IllegalArgumentException("Cannot instanciate the screen", e);
 			} catch (IllegalAccessException e) {
 				logger.log(Level.SEVERE, "Cannot instanciate the screen", e);
-				return;
+				throw new IllegalArgumentException("Cannot instanciate the screen", e);
 			}
 			screen.setWizard(this);
 			screen.initUI();
