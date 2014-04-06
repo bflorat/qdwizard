@@ -108,6 +108,8 @@ Have a look at [the Jajuk DJ wizard](http://gitorious.org/jajuk/jajuk/blobs/mast
 Check http://bflorat.github.io/qdwizard/apidocs/
 
 # History
+* 2014/03/28: [4.1.0] (backward compatible)
+ * It is now possible to add or override a langpack using the `Langpack.addLocale()` method
 * 2014/03/28: [4.0.0] (backward compatibility slightly broken at runtime only)
  * The Wizard.setScreen() method now throws an `IllegalArgumentException` if provided screen is wrong or not accessible
  * javadoc augmentation and fixes
