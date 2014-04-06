@@ -81,6 +81,27 @@ import javax.swing.WindowConstants;
  * }
  * </pre>
  * 
+ * <li>Get and set wizard data using the 'data' map available from wizard and screen classes. This is a HashMap<Object,Object> so you can use anything as a key. <br/>
+ * A good practice is to create an enum in the Wizard class and use to enum entry as key for the data map :
+<pre>
+{@code
+public Class MyWizard extends Wizard {
+	enum Variable {VARIABLE_1,VARIABLE_2}
+	...
+	void someMethod(){
+		data.put(Variable.VARIABLE1,"a fine example String");
+	}
+}
+
+public Class MyScreen extends Screen {
+	void someMethod(){
+		String var1 = data.get(Variable.VARIABLE_1);
+	}
+}
+}
+</pre>
+ * </li>
+ * 
  * </ul>
  */
 public abstract class Wizard extends WindowAdapter implements ActionListener {
@@ -340,7 +361,10 @@ public abstract class Wizard extends WindowAdapter implements ActionListener {
 	 * Set the screen to display a a class.
 	 * 
 	 * @param screenClass
-	 *            screen class to set
+	 *            screen class to set. Note that this class must be public or
+	 *            you'll get an IllegalArgumentException.
+	 * @throw {@link IllegalArgumentException} if the screen class doesn't exist
+	 *        or is not accessible
 	 */
 	private void setScreen(Class<? extends Screen> screenClass) throws IllegalArgumentException {
 		Screen screen = null;

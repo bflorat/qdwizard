@@ -74,19 +74,20 @@ public Class getNextScreen(Class screen) {
 * initUI() method contains graphical code for your screen. This method is automatically called from screen constructor so don't call it by yourself.
 
 ### Data sharing between screens and wizard
-Get and set wizard data using the 'data' map available from wizard and screen classes. This is a HashMap<Object,Object> so you can use anything as a key. A good practice is to create an enum in the Wizard class and use to enum entry as key for the data map :
+Get and set wizard data using the 'data' map available from wizard and screen classes. This is a HashMap<Object,Object> so you can use anything as a key. 
+A good practice is to create an enum in the Wizard class and use to enum entry as key for the data map :
 ````java
 public Class MyWizard extends Wizard {
-	enum VARIABLES {VARIABLE_1,VARIABLE_2}
+	enum Variable {VARIABLE_1,VARIABLE_2}
 	...
 	void someMethod(){
-		data.put(VARIABLES.VARIABLE1,"a fine example String");
+		data.put(Variable.VARIABLE1,"a fine example String");
 	}
 }
 
 public Class MyScreen extends Screen {
 	void someMethod(){
-		String var1 = data.get(VARIABLE_1);
+		String var1 = data.get(Variable.VARIABLE_1);
 	}
 }
 ````
