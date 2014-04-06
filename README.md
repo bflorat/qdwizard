@@ -1,4 +1,5 @@
 # QDWizard
+**_Why should it be more complicated ?_**
 * QDWizard is a dead simple API for creating Swing wizards with a learning curve of less than 15 minutes.
 * It is released under the [LGPL V2.1](http://www.gnu.org/licenses/lgpl-2.1.html) license
 * This library follows [semantic versioning scheme](http://semver.org/) from version 4.0.0
@@ -11,9 +12,11 @@
 # Features
 * Designed to minimize required code. Only few methods to implement.
 * Simple design, only two classes visible by the programmer
-* Maven powered : QDWizard is available from Maven central repository as artefact (net.sf.qdwizard:qdwizard)
-* I18n support for action buttons (see [this class](https://github.com/bflorat/qdwizard/blob/master/src/main/java/org/qdwizard/Langpack.java) to get the list of supported languages)
-* Full branching support, can implement any wizard cinematic
+* None dependency
+* Maven powered : QDWizard is available from Maven central repository as artifact (net.sf.qdwizard:qdwizard)
+* I18n support for action buttons 
+> see [this class](https://github.com/bflorat/qdwizard/blob/master/src/main/java/org/qdwizard/Langpack.java) to get the list of natively supported languages. It is still possible to add manually your own langpack
+* Full branching support, can implement any wizard navigation
 * Error management using the simple setProblem() method
 * Supports Wizard images natively and resizes image automatically
 * Ultra light API: only few KB
@@ -50,7 +53,7 @@ MyWizard wizard = new Wizard(new Wizard.Builder("wizard name", ActionSelectionPa
  * `headerBackgroundImage()` adds an auto-resized image as header's background
  * `leftSideImage()` adds an image to be displayed as a left side panel. This image is automatically extended to fit all the available space. To avoid letting users to see this image being resized at first display, make sure to create an image than has the right dimension out of the box.
 * `finish()` method implements actions to be done at the end of the wizard
-* `getPreviousScreen()` and `getNextScreen()` have to return previous or next screen class. Example:
+* `getPreviousScreen()` and `getNextScreen()` have to return previous or next screen class :
 
 ````java
 public Class getNextScreen(Class screen) {
@@ -96,6 +99,7 @@ public Class MyScreen extends Screen {
 * By default, QDwizard keeps screens into memory so user can go previous or next and keep typed values. If you want to clear this cache, use the `ClearPoint` annotation against your screen(s) classes. When user reaches a screen that use this annotation, the screens cache is cleaned up.
 * The Screen class contains two empty methods onEnter() and onLeave() which are called by the wizard on entering and respectively before leaving the screen. You can override them if you want your screens to be notified on enter or leave. Note that this happens only in forward mode, which means `onEnter()` won't be called when you return to a screen via the previous button and `onLeave()` won't be called when you leave the screen via the previous button.
 * You can implement a `cancel()` method in your wizard, which will be called when the user presses the Cancel button.
+* You can come with you own langpack if it is not provided natively by QDWizard or you can override an existing langpack using the `Langpack.addLocale()` method.
 
 ##Samples
 Have a look at [the Jajuk DJ wizard](http://gitorious.org/jajuk/jajuk/blobs/master/jajuk/src/main/java/org/jajuk/ui/wizard/DigitalDJWizard.java)
