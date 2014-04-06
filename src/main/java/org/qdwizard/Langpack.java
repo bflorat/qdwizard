@@ -31,7 +31,7 @@ import java.util.Map;
  * non-latin1 characters) and because QDwizard comes with a very low number of
  * strings
  */
-class Langpack {
+public class Langpack {
 	private static List<String> defaults = Arrays.asList("Finish", "Cancel", "Previous", "Next");
 	// Strings content : "Finish", "Cancel", "Previous", "Next"
 	static private Map<Locale, List<String>> strings = new HashMap<Locale, List<String>>(20);
