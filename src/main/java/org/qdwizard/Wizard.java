@@ -338,9 +338,12 @@ public abstract class Wizard extends WindowAdapter implements ActionListener {
 			if ("Prev".equals(ae.getActionCommand())) {
 				setScreen(getPreviousScreen(current.getClass()));
 			} else if ("Next".equals(ae.getActionCommand())) {
-				current.onNext();
-				setScreen(getNextScreen(current.getClass()));
-				current.onEnter();
+                // only go to next screen if onNext() of current screen 
+                // returns true
+			    if(current.onNext()) {
+	                setScreen(getNextScreen(current.getClass()));
+	                current.onEnter();
+				}
 			} else if ("Cancel".equals(ae.getActionCommand())) {
 				current.onCancelled();
 				data.clear();
