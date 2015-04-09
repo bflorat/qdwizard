@@ -81,25 +81,30 @@ import javax.swing.WindowConstants;
  * }
  * </pre>
  * 
- * <li>Get and set wizard data using the 'data' map available from wizard and screen classes. This is a HashMap<Object,Object> so you can use anything as a key. <br/>
- * A good practice is to create an enum in the Wizard class and use to enum entry as key for the data map :
-<pre>
-{@code
-public Class MyWizard extends Wizard {
-	enum Variable {VARIABLE_1,VARIABLE_2}
-	...
-	void someMethod(){
-		data.put(Variable.VARIABLE1,"a fine example String");
-	}
-}
-
-public Class MyScreen extends Screen {
-	void someMethod(){
-		String var1 = data.get(Variable.VARIABLE_1);
-	}
-}
-}
-</pre>
+ * <li>Get and set wizard data using the 'data' map available from wizard and
+ * screen classes. This is a HashMap<Object,Object> so you can use anything as a
+ * key. <br/>
+ * A good practice is to create an enum in the Wizard class and use to enum
+ * entry as key for the data map :
+ * 
+ * <pre>
+ * {@code
+ * public Class MyWizard extends Wizard {
+ * 	enum Variable {VARIABLE_1,VARIABLE_2}
+ * 	...
+ * 	void someMethod(){
+ * 		data.put(Variable.VARIABLE1,"a fine example String");
+ * 	}
+ * }
+ * 
+ * public Class MyScreen extends Screen {
+ * 	void someMethod(){
+ * 		String var1 = data.get(Variable.VARIABLE_1);
+ * 	}
+ * }
+ * }
+ * </pre>
+ * 
  * </li>
  * 
  * </ul>
@@ -338,11 +343,11 @@ public abstract class Wizard extends WindowAdapter implements ActionListener {
 			if ("Prev".equals(ae.getActionCommand())) {
 				setScreen(getPreviousScreen(current.getClass()));
 			} else if ("Next".equals(ae.getActionCommand())) {
-                // only go to next screen if onNext() of current screen 
-                // returns true
-			    if(current.onNext()) {
-	                setScreen(getNextScreen(current.getClass()));
-	                current.onEnter();
+				// only go to next screen if onNext() of current screen
+				// returns true
+				if (current.onNext()) {
+					setScreen(getNextScreen(current.getClass()));
+					current.onEnter();
 				}
 			} else if ("Cancel".equals(ae.getActionCommand())) {
 				current.onCancelled();
@@ -359,38 +364,42 @@ public abstract class Wizard extends WindowAdapter implements ActionListener {
 			dialog.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		}
 	}
-	
+
 	/**
-	 * Switches to the next screen.
+	 * Programatical switch to the next screen.
 	 * 
 	 * @return true if successful
 	 */
 	public boolean nextScreen() {
-	    Class<? extends Screen> nextScreen = getNextScreen(current.getClass());
-	    
-	    if(nextScreen == null || !current.canGoNext()) return false;
-	    
-	    if(!current.onNext()) return false;
-	    
+		Class<? extends Screen> nextScreen = getNextScreen(current.getClass());
+		// We still test if the switch is legal
+		if (nextScreen == null || !current.canGoNext()) {
+			return false;
+		}
+		// regular next
+		if (!current.onNext()) {
+			return false;
+		}
+
 		setScreen(nextScreen);
 		current.onEnter();
-		
+
 		return true;
 	}
-	
+
 	/**
-	 * Switches to the previous screen.
+	 * Programatical switch to the previous screen.
 	 * 
 	 * @return true if successful
 	 */
-	public boolean previousScreen() 
-	{
-	    Class<? extends Screen> previousScreen = getPreviousScreen(current.getClass());
-	    
-	    if(previousScreen == null || !current.canGoPrevious()) return false;
-	    
+	public boolean previousScreen() {
+		Class<? extends Screen> previousScreen = getPreviousScreen(current.getClass());
+		// We still test if the switch is legal
+		if (previousScreen == null || !current.canGoPrevious()) {
+			return false;
+		}
 		setScreen(previousScreen);
-		
+
 		return true;
 	}
 
@@ -598,5 +607,5 @@ public abstract class Wizard extends WindowAdapter implements ActionListener {
 			dialog.dispose();
 		}
 	}
-	
+
 }
