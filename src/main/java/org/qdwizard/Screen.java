@@ -80,7 +80,7 @@ public abstract class Screen extends JPanel {
 	 * 
 	 * @return true if...
 	 */
-	public boolean canFinish() {
+	boolean canFinish() {
 		// Can finish only if none problem
 		return state.getCanFinish() && state.getProblem() == null;
 	}
@@ -90,7 +90,7 @@ public abstract class Screen extends JPanel {
 	 * 
 	 * @param b
 	 */
-	public void setCanFinish(boolean b) {
+	protected void setCanFinish(boolean b) {
 		state.setCanFinish(b);
 		notifyGUI();
 	}
@@ -101,7 +101,7 @@ public abstract class Screen extends JPanel {
 	 * 
 	 * @return true if...
 	 */
-	public boolean canGoNext() {
+	boolean canGoNext() {
 		// if screen is last one, cannot go further
 		return state.getCanGoNext() && !state.getCanFinish() && state.getProblem() == null;
 	}
@@ -112,7 +112,7 @@ public abstract class Screen extends JPanel {
 	 * 
 	 * @return true if...
 	 */
-	public boolean canCancel() {
+	boolean canCancel() {
 		return state.getCanCancel();
 	}
 
@@ -131,7 +131,7 @@ public abstract class Screen extends JPanel {
 	 * 
 	 * @param b
 	 */
-	public void setCanGoNext(boolean b) {
+	protected void setCanGoNext(boolean b) {
 		state.setCanGoNext(b);
 		notifyGUI();
 	}
@@ -141,7 +141,7 @@ public abstract class Screen extends JPanel {
 	 * 
 	 * @param b
 	 */
-	public void setCanGoPrevious(boolean b) {
+	protected void setCanGoPrevious(boolean b) {
 		state.setCanGoPrevious(b);
 		notifyGUI();
 	}
@@ -151,7 +151,7 @@ public abstract class Screen extends JPanel {
 	 * 
 	 * @param b
 	 */
-	public void setCanCancel(boolean b) {
+	protected void setCanCancel(boolean b) {
 		state.setCanCancel(b);
 		notifyGUI();
 	}
