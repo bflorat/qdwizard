@@ -73,7 +73,7 @@ public abstract class Screen extends JPanel {
 	 * 
 	 * @return true if...
 	 */
-	boolean canFinish() {
+	public boolean canFinish() {
 		// Can finish only if none problem
 		return state.getCanFinish() && state.getProblem() == null;
 	}
@@ -94,7 +94,7 @@ public abstract class Screen extends JPanel {
 	 * 
 	 * @return true if...
 	 */
-	boolean canGoNext() {
+	public boolean canGoNext() {
 		// if screen is last one, cannot go further
 		return state.getCanGoNext() && !state.getCanFinish() && state.getProblem() == null;
 	}
@@ -115,7 +115,7 @@ public abstract class Screen extends JPanel {
 	 * 
 	 * @return true if...
 	 */
-	boolean canGoPrevious() {
+	public boolean canGoPrevious() {
 		return state.getCanGoPrevious();
 	}
 
@@ -124,7 +124,7 @@ public abstract class Screen extends JPanel {
 	 * 
 	 * @param b
 	 */
-	void setCanGoNext(boolean b) {
+	public void setCanGoNext(boolean b) {
 		state.setCanGoNext(b);
 		notifyGUI();
 	}
@@ -134,7 +134,7 @@ public abstract class Screen extends JPanel {
 	 * 
 	 * @param b
 	 */
-	void setCanGoPrevious(boolean b) {
+	public void setCanGoPrevious(boolean b) {
 		state.setCanGoPrevious(b);
 		notifyGUI();
 	}
@@ -221,7 +221,7 @@ public abstract class Screen extends JPanel {
 	 * @param wizard
 	 *            the new wizard
 	 */
-	protected void setWizard(Wizard wizard) {
+	void setWizard(Wizard wizard) {
 		this.wizard = wizard;
 		// Screen data = wizard data
 		this.data = wizard.data;
