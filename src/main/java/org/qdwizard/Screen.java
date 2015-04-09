@@ -43,7 +43,6 @@ public abstract class Screen extends JPanel {
 	/** Data is shared with wizard scope */
 	public Map<Object, Object> data;
 	private Wizard wizard;
-	private String description;
 
 	/**
 	 * Construct a screen.
@@ -214,6 +213,15 @@ public abstract class Screen extends JPanel {
 	public void onFinished() {
 		// does nothing by default
 	}
+	
+	/**
+     * Gets the associated wizard.
+     * 
+     * @param the wizard
+     */
+    public Wizard getWizard() {
+        return this.wizard;
+    }
 
 	/**
 	 * Sets the associated wizard.

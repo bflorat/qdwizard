@@ -356,9 +356,43 @@ public abstract class Wizard extends WindowAdapter implements ActionListener {
 			dialog.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		}
 	}
+	
+	/**
+	 * Switches to the next screen.
+	 * 
+	 * @return true if successful
+	 */
+	public boolean nextScreen() {
+	    Class<? extends Screen> nextScreen = getNextScreen(current.getClass());
+	    
+	    if(nextScreen == null || !current.canGoNext()) return false;
+	    
+	    if(!current.onNext()) return false;
+	    
+		setScreen(nextScreen);
+		current.onEnter();
+		
+		return true;
+	}
+	
+	/**
+	 * Switches to the previous screen.
+	 * 
+	 * @return true if successful
+	 */
+	public boolean previousScreen() 
+	{
+	    Class<? extends Screen> previousScreen = getPreviousScreen(current.getClass());
+	    
+	    if(previousScreen == null || !current.canGoPrevious()) return false;
+	    
+		setScreen(previousScreen);
+		
+		return true;
+	}
 
 	/**
-	 * Set the screen to display a a class.
+	 * Set the screen to display a class.
 	 * 
 	 * @param screenClass
 	 *            screen class to set. Note that this class must be public or
