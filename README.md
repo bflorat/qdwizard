@@ -102,6 +102,8 @@ public Class MyScreen extends Screen {
 ##Advanced topics
 * By default, the Cancel button just close the wizard window. You can implement a `onCancel()` method in your wizard, which will be called when the user presses the Cancel button. This method should should return true to close the window or false if you want to keep it opened.
 * You can come with you own langpack if it is not provided natively by QDWizard or you can override an existing langpack using the `Langpack.addLocale()` method.
+* [from 4.2.0] You can call the `Screen.setCanGoNext(boolean)`, `Screen.setCanGoPrevious(boolean)`,`Screen.setCanCancel(boolean)` and `Screen.setCanFinish(boolean)` from your screen class as a way to force disabling of "Previous","Next", "Cancel" or "Finish" buttons on certain events.
+* [from 4.2.0] You can call the `Wizard.nextScreen()` and `Wizard.previousScreen()` to force programmatically the screen switch (without user action on the "previous" or "next" buttons).
 
 ##Samples
 Have a look at [the Jajuk DJ wizard](https://github.com/jajuk-team/jajuk/blob/master/jajuk/src/main/java/org/jajuk/ui/wizard/digital_dj/DigitalDJWizard.java)
@@ -110,6 +112,10 @@ Have a look at [the Jajuk DJ wizard](https://github.com/jajuk-team/jajuk/blob/ma
 Check http://bflorat.github.io/qdwizard/apidocs/
 
 # History
+* 2015/04/10: [4.2.0] (backward compatible)
+* Several bugfixes, check https://github.com/bflorat/qdwizard/issues
+* Added programmatical next/previous Screen on wizards (thx Boformer)
+* setCanGoNext() and setCanGoPrevious() methods are now public and be overriden in screens (thx Boformer)
 * 2014/03/28: [4.1.0] (backward compatible)
  * It is now possible to add or override a langpack using the `Langpack.addLocale()` method
 * 2014/03/28: [4.0.0] (backward compatibility slightly broken at runtime only)

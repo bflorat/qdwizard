@@ -114,7 +114,7 @@ public abstract class Screen extends JPanel {
 	 * 
 	 * @return true if...
 	 */
-	public boolean canGoPrevious() {
+	boolean canGoPrevious() {
 		return state.getCanGoPrevious();
 	}
 
