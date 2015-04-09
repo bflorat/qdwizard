@@ -564,14 +564,5 @@ public abstract class Wizard extends WindowAdapter implements ActionListener {
 			dialog.dispose();
 		}
 	}
-
-	/**
-	 * Was canceled.
-	 * 
-	 * 
-	 * @return true if...
-	 */
-	public boolean wasCancelled() {
-		return bCancelled;
-	}
+	
 }
