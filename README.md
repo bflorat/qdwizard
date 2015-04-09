@@ -98,7 +98,7 @@ public Class MyScreen extends Screen {
 * Use `setCanFinish(true)` method in a screen to set the fact that the screen is the last one (user can click on Finish button).
 * By default, QDwizard keeps screens into memory so user can go previous or next and keep typed values. If you want to clear this cache, use the `ClearPoint` annotation against your screen(s) classes. When user reaches a screen that use this annotation, the screens cache is cleaned up.
 * The Screen class contains two empty methods `onEnter()` and `onLeave()` which are called by the wizard respectively on entering and before leaving the screen. You can override them if you want your screens to be notified on enter or leave. Note that this happens only in forward mode, which means `onEnter()` won't be called when you return to a screen via the previous button and `onLeave()` won't be called when you leave the screen via the previous button.
-* By default, the Cancel button just close the wizard window. You can implement a `cancel()` method in your wizard, which will be called when the user presses the Cancel button. This method should should return true to close the window or false if you want to keep it opened.
+* By default, the Cancel button just close the wizard window. You can implement a `onCancel()` method in your wizard, which will be called when the user presses the Cancel button. This method should should return true to close the window or false if you want to keep it opened.
 * You can come with you own langpack if it is not provided natively by QDWizard or you can override an existing langpack using the `Langpack.addLocale()` method.
 
 ##Samples
