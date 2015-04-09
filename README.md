@@ -11,27 +11,27 @@
 
 # Features
 * Designed to minimize required code. Only few methods to implement.
-* Simple design, only two classes visible by the programmer
-* None dependency
-* Maven powered : QDWizard is available from Maven central repository as artifact (net.sf.qdwizard:qdwizard)
-* I18n support for action buttons 
-> see [this class](https://github.com/bflorat/qdwizard/blob/master/src/main/java/org/qdwizard/Langpack.java) to get the list of natively supported languages. It is still possible to add manually your own langpack
-* Full branching support, can implement any wizard navigation
-* Error management using the simple setProblem() method
-* Supports Wizard images natively and resizes image automatically
-* Ultra light API: only few KB
-* Actively supported by the Jajuk team
-* Learning curve of 15 minutes maximum
-* Real world samples provided, see [jajuk classes](http://gitorious.org/jajuk/jajuk/blobs/master/jajuk/src/main/java/org/jajuk/ui/wizard/DigitalDJWizard.java)
+* Simple design, only two classes visible to the programmer.
+* None dependency.
+* Maven powered : QDWizard is available from Maven central repository as artifact (net.sf.qdwizard:qdwizard).
+* I18n support for action buttons.
+> see [this class](https://github.com/bflorat/qdwizard/blob/master/src/main/java/org/qdwizard/Langpack.java) to get the list of natively supported languages. It is still possible to add manually your own langpack.
+* Full branching support, can implement any wizard navigation.
+* Error management using the simple setProblem() method.
+* Supports Wizard images natively and resizes image automatically.
+* Ultra light API: only few KB.
+* Actively supported by the Jajuk team.
+* Learning curve of 15 minutes maximum.
+* Real world samples provided, see [jajuk classes](https://github.com/jajuk-team/jajuk/blob/master/jajuk/src/main/java/org/jajuk/ui/wizard/digital_dj/DigitalDJWizard.java).
 
 #Requirements
 * To use QDWizard, just add the qdwizard-[release].jar to your CLASSPATH
-* JRE 1.5 and above
+* JRE 1.5 and above.
 
 #Manual
 ## Concepts
-* A wizard is build of several screens
-* Previous and next screens decision is taken by the wizard class
+* A wizard is build of several screens.
+* Previous and next screens decision is taken by the wizard class.
 * Wizard data is stored in a map named 'data'. It is accessible from Wizard and Screen class. Store and get options selected by the user here.
 
 ### Wizard creation
@@ -97,12 +97,12 @@ public Class MyScreen extends Screen {
 * Set errors using the `setProblem(String)` method. The error will be displayed in red to the user at the bottom of the screen. When error is fixed, use a `setProblem(null)`.
 * Use `setCanFinish(true)` method in a screen to set the fact that the screen is the last one (user can click on Finish button).
 * By default, QDwizard keeps screens into memory so user can go previous or next and keep typed values. If you want to clear this cache, use the `ClearPoint` annotation against your screen(s) classes. When user reaches a screen that use this annotation, the screens cache is cleaned up.
-* The Screen class contains two empty methods onEnter() and onLeave() which are called by the wizard on entering and respectively before leaving the screen. You can override them if you want your screens to be notified on enter or leave. Note that this happens only in forward mode, which means `onEnter()` won't be called when you return to a screen via the previous button and `onLeave()` won't be called when you leave the screen via the previous button.
-* You can implement a `cancel()` method in your wizard, which will be called when the user presses the Cancel button.
+* The Screen class contains two empty methods `onEnter()` and `onLeave()` which are called by the wizard respectively on entering and before leaving the screen. You can override them if you want your screens to be notified on enter or leave. Note that this happens only in forward mode, which means `onEnter()` won't be called when you return to a screen via the previous button and `onLeave()` won't be called when you leave the screen via the previous button.
+* By default, the Cancel button just close the wizard window. You can implement a `cancel()` method in your wizard, which will be called when the user presses the Cancel button. This method should should return true to close the window or false if you want to keep it opened.
 * You can come with you own langpack if it is not provided natively by QDWizard or you can override an existing langpack using the `Langpack.addLocale()` method.
 
 ##Samples
-Have a look at [the Jajuk DJ wizard](http://gitorious.org/jajuk/jajuk/blobs/master/jajuk/src/main/java/org/jajuk/ui/wizard/DigitalDJWizard.java)
+Have a look at [the Jajuk DJ wizard](https://github.com/jajuk-team/jajuk/blob/master/jajuk/src/main/java/org/jajuk/ui/wizard/digital_dj/DigitalDJWizard.java)
 
 ##Javadoc
 Check http://bflorat.github.io/qdwizard/apidocs/
