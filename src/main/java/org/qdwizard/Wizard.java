@@ -30,6 +30,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -43,6 +44,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.Timer;
 import javax.swing.WindowConstants;
 
 /**
@@ -141,7 +143,23 @@ public abstract class Wizard extends WindowAdapter implements ActionListener {
 	private boolean bCancelled;
 	private final int layoutHPadding;
 	private final int layoutVPadding;
+	
+	private static final int GUI_TIMER_INTERVAL_MILLIS=100;
 
+	
+	/** This timer refreshes the buttons as required by setting the RESERVED_DATA.UPDATE_GUI flag  */
+	private Timer refreshGUITimer = new Timer(GUI_TIMER_INTERVAL_MILLIS,new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			synchronized (data) {
+				if ((Boolean)(data.get(Utils.RESERVED_DATA.UPDATE_GUI))){
+					updateGUIState();
+					data.put(Utils.RESERVED_DATA.UPDATE_GUI, false);
+				}
+			}
+		}
+	});
+	
 	/**
 	 * Fluent-API style Wizard Builder
 	 */
@@ -306,6 +324,7 @@ public abstract class Wizard extends WindowAdapter implements ActionListener {
 		createDialog();
 		setScreen(initial);
 		current.onEnter();
+		refreshGUITimer.start();
 		dialog.setVisible(true);
 	}
 
@@ -431,7 +450,7 @@ public abstract class Wizard extends WindowAdapter implements ActionListener {
 				logger.log(Level.SEVERE, "Cannot instanciate the screen", e);
 				throw new IllegalArgumentException("Cannot instanciate the screen", e);
 			}
-			screen.setWizard(this);
+			screen.setData(this.data);
 			screen.initUI();
 			hmClassScreens.put(screenClass, screen);
 		}

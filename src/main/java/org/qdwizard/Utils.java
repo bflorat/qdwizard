@@ -26,6 +26,13 @@ import javax.swing.ImageIcon;
  * Various internal utilities
  */
 class Utils {
+	
+	/** List of reserved data types */
+	enum RESERVED_DATA{
+		/** Request for GUI refresh, maps a boolean*/
+		UPDATE_GUI
+	}
+	
   
   /**
    * Image resizes

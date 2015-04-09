@@ -23,7 +23,6 @@ package org.qdwizard;
 import java.util.Map;
 
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
 /**
  * A wizard screen
@@ -42,13 +41,22 @@ public abstract class Screen extends JPanel {
 	private final ScreenState state;
 	/** Data is shared with wizard scope */
 	public Map<Object, Object> data;
-	private Wizard wizard;
 
 	/**
 	 * Construct a screen.
 	 */
 	public Screen() {
 		state = new ScreenState(true, true, true, false, null);
+	}
+
+	/**
+	 * Set the data map from the wizard
+	 * 
+	 * @param data
+	 *            the data map
+	 */
+	void setData(Map<Object, Object> data) {
+		this.data = data;
 	}
 
 	/**
@@ -213,38 +221,14 @@ public abstract class Screen extends JPanel {
 	public void onFinished() {
 		// does nothing by default
 	}
-	
-	/**
-     * Gets the associated wizard.
-     * 
-     * @param the wizard
-     */
-    public Wizard getWizard() {
-        return this.wizard;
-    }
 
 	/**
-	 * Sets the associated wizard.
-	 * 
-	 * @param wizard
-	 *            the new wizard
-	 */
-	void setWizard(Wizard wizard) {
-		this.wizard = wizard;
-		// Screen data = wizard data
-		this.data = wizard.data;
-	}
-
-	/**
-	 * Notify gui.
+	 * Ask for GUI refresh
 	 * 
 	 */
 	private void notifyGUI() {
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				Screen.this.wizard.updateGUIState();
-			}
-		});
+		synchronized (data) {
+			this.data.put(Utils.RESERVED_DATA.UPDATE_GUI, true);
+		}
 	}
 }
