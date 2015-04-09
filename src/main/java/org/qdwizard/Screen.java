@@ -227,7 +227,7 @@ public abstract class Screen extends JPanel {
 		this.data = wizard.data;
 	}
 
-    /**
+	/**
 	 * Notify gui.
 	 * 
 	 */
