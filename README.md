@@ -30,7 +30,7 @@
 
 #Manual
 ## Concepts
-* A wizard is build of several screens.
+* A wizard is build of several screens. The wizard provides the screens cinamatic and the screens contains the GUI code and the business logic (can we go next for instance).
 * Previous and next screens decision is taken by the wizard class.
 * Wizard data is stored in a map named 'data'. It is accessible from Wizard and Screen class. Store and get options selected by the user here.
 
