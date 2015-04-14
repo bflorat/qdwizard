@@ -67,6 +67,7 @@ public class Langpack {
 	 * Set the QDwizard locale.
 	 * 
 	 * @param locale
+	 *            the locale to set
 	 */
 	public static void setLocale(Locale locale) {
 		Langpack.locale = locale;

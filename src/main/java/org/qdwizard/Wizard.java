@@ -48,67 +48,76 @@ import javax.swing.WindowConstants;
 
 /**
  * A Wizard dialog displaying one or more screens
- * <ul>
- * <li>Create a class that extends Wizard. You have to implement
- * getPreviousScreen(), getNextScreen() and finish() abstract methods</li>
- * <li>Displaying the wizard:</li>
+ * <p>
+ * Create a class that extends Wizard. You have to implement
+ * getPreviousScreen(), getNextScreen() and finish() abstract methods
+ * </p>
+ * <p>
+ * Displaying the wizard:
+ * </p>
  * 
  * <pre>
  * {
- * 	@{code
+ * 	&#064;code
  * 	MyWizard wizard = new Wizard(new Wizard.Builder(&quot;wizard name&quot;, ActionSelectionPanel.class,
  * 			window).hSize(600).vSize(500).locale(LocaleManager.getLocale()).icon(anIcon));
  * 	wizard.show();
  * }
  * </pre>
  * 
- * <li>{@code finish()} method implements actions to be done at the end of the
- * wizard</li>
- * <li>{@code getPreviousScreen()} and {@code getNextScreen()} have to return
- * previous or next screen class. Example:</li>
+ * <p>
+ * {@code finish()} method implements actions to be done at the end of the
+ * wizard
+ * </p>
+ * <p>
+ * {@code getPreviousScreen()} and {@code getNextScreen()} have to return
+ * previous or next screen class. Example:
+ * </p>
  * 
  * <pre>
- * {@code
- * public Class getNextScreen(Class screen) {
- *   if (ActionSelectionPanel.class.equals(getCurrentScreen())) {
- *     String sAction = (String) data.get(KEY_ACTION);
- *     if (ActionSelectionPanel.ACTION_CREATION.equals(sAction)) {
- *       return TypeSelectionPanel.class;
- *     } 
- *     else if (ActionSelectionPanel.ACTION_DELETE.equals(sAction)) {
- *       return RemovePanel.class;
- *     }
- *   }
+ *  {@code
+ *  public Class getNextScreen(Class screen) {
+ *    if (ActionSelectionPanel.class.equals(getCurrentScreen())) {
+ *      String sAction = (String) data.get(KEY_ACTION);
+ *      if (ActionSelectionPanel.ACTION_CREATION.equals(sAction)) {
+ *        return TypeSelectionPanel.class;
+ *      } 
+ *      else if (ActionSelectionPanel.ACTION_DELETE.equals(sAction)) {
+ *        return RemovePanel.class;
+ *      }
+ *    }
+ *  }
  * }
  * </pre>
  * 
- * <li>Get and set wizard data using the 'data' map available from wizard and
- * screen classes. This is a HashMap<Object,Object> so you can use anything as a
- * key. <br/>
+ * <p>
+ * Get and set wizard data using the 'data' map available from wizard and screen
+ * classes. This is a {@code HashMap<Object,Object>} so you can use anything as
+ * a key.
+ * </p>
+ * <p>
  * A good practice is to create an enum in the Wizard class and use to enum
  * entry as key for the data map :
+ * </p>
  * 
  * <pre>
- * {@code
- * public Class MyWizard extends Wizard {
- * 	enum Variable {VARIABLE_1,VARIABLE_2}
- * 	...
- * 	void someMethod(){
- * 		data.put(Variable.VARIABLE1,"a fine example String");
- * 	}
- * }
- * 
- * public Class MyScreen extends Screen {
- * 	void someMethod(){
- * 		String var1 = data.get(Variable.VARIABLE_1);
- * 	}
- * }
+ *  {@code
+ *  public Class MyWizard extends Wizard {
+ *  	enum Variable {VARIABLE_1,VARIABLE_2}
+ *  	...
+ *  	void someMethod(){
+ *  		data.put(Variable.VARIABLE1,"a fine example String");
+ *  	}
+ *  }
+ *  
+ *  public Class MyScreen extends Screen {
+ *  	void someMethod(){
+ *  		String var1 = data.get(Variable.VARIABLE_1);
+ *  	}
+ *  }
  * }
  * </pre>
  * 
- * </li>
- * 
- * </ul>
  */
 public abstract class Wizard extends WindowAdapter implements ActionListener {
 	private static final String FINISH_ACTION = "Finish";
