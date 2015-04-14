@@ -52,13 +52,10 @@ import javax.swing.WindowConstants;
  * Create a class that extends Wizard. You have to implement
  * getPreviousScreen(), getNextScreen() and finish() abstract methods
  * </p>
- * <p>
  * Displaying the wizard:
- * </p>
- * 
+ *
  * <pre>
- * {
- * 	&#064;code
+ * {@code
  * 	MyWizard wizard = new Wizard(new Wizard.Builder(&quot;wizard name&quot;, ActionSelectionPanel.class,
  * 			window).hSize(600).vSize(500).locale(LocaleManager.getLocale()).icon(anIcon));
  * 	wizard.show();
