@@ -30,7 +30,6 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -112,6 +111,10 @@ import javax.swing.WindowConstants;
  * </ul>
  */
 public abstract class Wizard extends WindowAdapter implements ActionListener {
+	private static final String FINISH_ACTION = "Finish";
+	private static final String CANCEL_ACTION = "Cancel";
+	private static final String NEXT_ACTION = "Next";
+	private static final String PREV_ACTION = "Prev";
 	private final String name;
 	private Screen current;
 	private final Class<? extends Screen> initial;
@@ -143,23 +146,49 @@ public abstract class Wizard extends WindowAdapter implements ActionListener {
 	private boolean bCancelled;
 	private final int layoutHPadding;
 	private final int layoutVPadding;
-	
-	private static final int GUI_TIMER_INTERVAL_MILLIS=100;
 
-	
-	/** This timer refreshes the buttons as required by setting the RESERVED_DATA.UPDATE_GUI flag  */
-	private Timer refreshGUITimer = new Timer(GUI_TIMER_INTERVAL_MILLIS,new ActionListener() {
+	private static final int GUI_TIMER_INTERVAL_MILLIS = 100;
+
+	/** This timer perform actions required by setting the RESERVED_DATA flags */
+	private Timer refreshGUITimer = new Timer(GUI_TIMER_INTERVAL_MILLIS, new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			synchronized (data) {
-				if ((Boolean)(data.get(Utils.RESERVED_DATA.UPDATE_GUI))){
+				// Only one action at each loop
+				Boolean updateGui = (Boolean) data.get(Utils.RESERVED_DATA.UPDATE_GUI);
+				if (updateGui != null && updateGui) {
 					updateGUIState();
 					data.put(Utils.RESERVED_DATA.UPDATE_GUI, false);
+					return;
+				}
+				Boolean nextScreen = (Boolean) data.get(Utils.RESERVED_DATA.FORCED_NEXT_SCREEN);
+				if (nextScreen != null && nextScreen) {
+					forceNextScreen();
+					data.put(Utils.RESERVED_DATA.FORCED_NEXT_SCREEN, false);
+					return;
+				}
+				Boolean prevScreen = (Boolean) data.get(Utils.RESERVED_DATA.FORCED_PREV_SCREEN);
+				if (prevScreen != null && prevScreen) {
+					forcePreviousScreen();
+					data.put(Utils.RESERVED_DATA.FORCED_PREV_SCREEN, false);
+					return;
+				}
+				Boolean cancel = (Boolean) data.get(Utils.RESERVED_DATA.FORCED_CANCEL);
+				if (cancel != null && cancel) {
+					forceCancel();
+					data.put(Utils.RESERVED_DATA.FORCED_CANCEL, false);
+					return;
+				}
+				Boolean finish = (Boolean) data.get(Utils.RESERVED_DATA.FORCED_FINISH);
+				if (finish != null && finish) {
+					forceFinish();
+					data.put(Utils.RESERVED_DATA.FORCED_FINISH, false);
+					return;
 				}
 			}
 		}
 	});
-	
+
 	/**
 	 * Fluent-API style Wizard Builder
 	 */
@@ -359,22 +388,22 @@ public abstract class Wizard extends WindowAdapter implements ActionListener {
 		try {
 			// Previous required. Note that the previous button is enabled only
 			// if the user can go previous
-			if ("Prev".equals(ae.getActionCommand())) {
+			if (PREV_ACTION.equals(ae.getActionCommand())) {
 				setScreen(getPreviousScreen(current.getClass()));
-			} else if ("Next".equals(ae.getActionCommand())) {
+			} else if (NEXT_ACTION.equals(ae.getActionCommand())) {
 				// only go to next screen if onNext() of current screen
 				// returns true
 				if (current.onNext()) {
 					setScreen(getNextScreen(current.getClass()));
 					current.onEnter();
 				}
-			} else if ("Cancel".equals(ae.getActionCommand())) {
+			} else if (CANCEL_ACTION.equals(ae.getActionCommand())) {
 				current.onCancelled();
 				data.clear();
 				bCancelled = true;
 				onCancel();
 				dialog.dispose();
-			} else if ("Finish".equals(ae.getActionCommand())) {
+			} else if (FINISH_ACTION.equals(ae.getActionCommand())) {
 				current.onFinished();
 				finish();
 				dialog.dispose();
@@ -385,40 +414,61 @@ public abstract class Wizard extends WindowAdapter implements ActionListener {
 	}
 
 	/**
-	 * Programatical switch to the next screen.
+	 * Programmatical switch to the next screen.
 	 * 
 	 * @return true if successful
 	 */
-	public boolean nextScreen() {
+	public boolean forceNextScreen() {
 		Class<? extends Screen> nextScreen = getNextScreen(current.getClass());
 		// We still test if the switch is legal
 		if (nextScreen == null || !current.canGoNext()) {
 			return false;
 		}
 		// regular next
-		if (!current.onNext()) {
-			return false;
-		}
-
-		setScreen(nextScreen);
-		current.onEnter();
-
+		actionPerformed(new ActionEvent(this, 0, NEXT_ACTION));
 		return true;
 	}
 
 	/**
-	 * Programatical switch to the previous screen.
+	 * Programmatical canceling.
 	 * 
 	 * @return true if successful
 	 */
-	public boolean previousScreen() {
+	public boolean forceCancel() {
+		if (!current.canCancel()) {
+			return false;
+		}
+		// regular cancel
+		actionPerformed(new ActionEvent(this, 0, CANCEL_ACTION));
+		return true;
+	}
+
+	/**
+	 * Programmatical finishing.
+	 * 
+	 * @return true if successful
+	 */
+	public boolean forceFinish() {
+		if (!current.canFinish()) {
+			return false;
+		}
+		// regular finish
+		actionPerformed(new ActionEvent(this, 0, FINISH_ACTION));
+		return true;
+	}
+
+	/**
+	 * Programmatical switch to the previous screen.
+	 * 
+	 * @return true if successful
+	 */
+	public boolean forcePreviousScreen() {
 		Class<? extends Screen> previousScreen = getPreviousScreen(current.getClass());
 		// We still test if the switch is legal
 		if (previousScreen == null || !current.canGoPrevious()) {
 			return false;
 		}
-		setScreen(previousScreen);
-
+		actionPerformed(new ActionEvent(this, 0, PREV_ACTION));
 		return true;
 	}
 
@@ -611,11 +661,8 @@ public abstract class Wizard extends WindowAdapter implements ActionListener {
 		return true;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * java.awt.event.WindowListener#windowClosing(java.awt.event.WindowEvent)
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void windowClosing(WindowEvent windowEvent) {

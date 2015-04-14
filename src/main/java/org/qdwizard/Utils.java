@@ -30,7 +30,16 @@ class Utils {
 	/** List of reserved data types */
 	enum RESERVED_DATA{
 		/** Request for GUI refresh, maps a boolean*/
-		UPDATE_GUI
+		UPDATE_GUI,
+		/** Request for a programmatical next screen action */
+		FORCED_NEXT_SCREEN,
+		/** Request for a programmatical previous screen action */
+		FORCED_PREV_SCREEN,
+		/** Request for a programmatical cancel action */
+		FORCED_CANCEL,
+		/** Request for a programmatical finish action */
+		FORCED_FINISH,
+		
 	}
 	
   

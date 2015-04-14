@@ -191,6 +191,46 @@ public abstract class Screen extends JPanel {
 	}
 
 	/**
+	 * Programmatical switch to the next screen.
+	 * 
+	 */
+	public void forcedNextScreen() {
+		synchronized (data) {
+			this.data.put(Utils.RESERVED_DATA.FORCED_NEXT_SCREEN, true);
+		}
+	}
+
+	/**
+	 * Programmatical switch to the previous screen.
+	 * 
+	 */
+	public void forcedPreviousScreen() {
+		synchronized (data) {
+			this.data.put(Utils.RESERVED_DATA.FORCED_PREV_SCREEN, true);
+		}
+	}
+
+	/**
+	 * Programmatical cancel.
+	 * 
+	 */
+	public void forcedCancel() {
+		synchronized (data) {
+			this.data.put(Utils.RESERVED_DATA.FORCED_CANCEL, true);
+		}
+	}
+
+	/**
+	 * Programmatical finish.
+	 * 
+	 */
+	public void forcedFinish() {
+		synchronized (data) {
+			this.data.put(Utils.RESERVED_DATA.FORCED_FINISH, true);
+		}
+	}
+
+	/**
 	 * Called by wizard before the screen is left. This happens only in forward
 	 * mode, which means onLeave won't be called when you leave the screen via
 	 * the previous button.
