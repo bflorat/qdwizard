@@ -116,7 +116,7 @@ Check http://bflorat.github.io/qdwizard/apidocs/
 # History
 * 2015/04/10: [4.2.0] (backward compatible)
 * Several bugfixes, check https://github.com/bflorat/qdwizard/issues
-* Added programmatical next/previous Screen on wizards (thx Boformer)
+* Added programmatical actions on wizards and screens like `forceNextScreen()` (thx Boformer)
 * setCanGoNext() and setCanGoPrevious() methods are now public and be overriden in screens (thx Boformer)
 * 2014/03/28: [4.1.0] (backward compatible)
  * It is now possible to add or override a langpack using the `Langpack.addLocale()` method
