@@ -89,6 +89,7 @@ public abstract class Screen extends JPanel {
 	 * Set whether the finish button should be enabled.
 	 * 
 	 * @param b
+	 *            set whether we can finish from this screen
 	 */
 	protected void setCanFinish(boolean b) {
 		state.setCanFinish(b);
@@ -99,7 +100,7 @@ public abstract class Screen extends JPanel {
 	 * Can go next.
 	 * 
 	 * 
-	 * @return true if...
+	 * @return true if we can go next from this screen
 	 */
 	boolean canGoNext() {
 		// if screen is last one, cannot go further
@@ -110,7 +111,7 @@ public abstract class Screen extends JPanel {
 	 * Can cancel.
 	 * 
 	 * 
-	 * @return true if...
+	 * @return true if we can cancel from this screen
 	 */
 	boolean canCancel() {
 		return state.getCanCancel();
@@ -120,7 +121,7 @@ public abstract class Screen extends JPanel {
 	 * Can go previous.
 	 * 
 	 * 
-	 * @return true if...
+	 * @return true if we can go to the previous screen from this screen
 	 */
 	boolean canGoPrevious() {
 		return state.getCanGoPrevious();
@@ -130,6 +131,7 @@ public abstract class Screen extends JPanel {
 	 * Set whether the next button should be enabled.
 	 * 
 	 * @param b
+	 *            set whether we can go to the next screen from this screen
 	 */
 	protected void setCanGoNext(boolean b) {
 		state.setCanGoNext(b);
@@ -140,6 +142,7 @@ public abstract class Screen extends JPanel {
 	 * Set whether the previous button should be enabled.
 	 * 
 	 * @param b
+	 *            set whether we can go to the previous screen from this screen
 	 */
 	protected void setCanGoPrevious(boolean b) {
 		state.setCanGoPrevious(b);
@@ -150,6 +153,7 @@ public abstract class Screen extends JPanel {
 	 * Set whether the cancel (or System menu close) button should be enabled.
 	 * 
 	 * @param b
+	 *            set whether we can cancel from this screen
 	 */
 	protected void setCanCancel(boolean b) {
 		state.setCanCancel(b);
@@ -194,7 +198,7 @@ public abstract class Screen extends JPanel {
 	 * Programmatical switch to the next screen.
 	 * 
 	 */
-	public void forcedNextScreen() {
+	public void forceNextScreen() {
 		synchronized (data) {
 			this.data.put(Utils.RESERVED_DATA.FORCED_NEXT_SCREEN, true);
 		}
@@ -204,7 +208,7 @@ public abstract class Screen extends JPanel {
 	 * Programmatical switch to the previous screen.
 	 * 
 	 */
-	public void forcedPreviousScreen() {
+	public void forcePreviousScreen() {
 		synchronized (data) {
 			this.data.put(Utils.RESERVED_DATA.FORCED_PREV_SCREEN, true);
 		}
@@ -214,7 +218,7 @@ public abstract class Screen extends JPanel {
 	 * Programmatical cancel.
 	 * 
 	 */
-	public void forcedCancel() {
+	public void forceCancel() {
 		synchronized (data) {
 			this.data.put(Utils.RESERVED_DATA.FORCED_CANCEL, true);
 		}
@@ -224,7 +228,7 @@ public abstract class Screen extends JPanel {
 	 * Programmatical finish.
 	 * 
 	 */
-	public void forcedFinish() {
+	public void forceFinish() {
 		synchronized (data) {
 			this.data.put(Utils.RESERVED_DATA.FORCED_FINISH, true);
 		}
