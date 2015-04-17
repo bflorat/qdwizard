@@ -31,14 +31,14 @@
 #Manual
 ## Concepts
 * A wizard is build of several screens. 
- * The wizard provides the screens cinamatic (by setting the screen that's after or before each screen) and the code to be run at the end of the wizard (`finish()` method).
- * The screens contains the GUI code and the business logic (can we go next for instance).
+ * The wizard provides the screens cinematic (by setting the screen that's after or before each screen) and the code to be run at the end of the wizard (through `finish()` method).
+ * The screens contains the GUI code and the business logic (can we go next ? for instance).
 * Previous and next screens decision is taken by the wizard class.
 * Wizard data is stored in a map named 'data'. It is accessible from Wizard and Screen class. Store and get options selected by the user here.
 
 ### Wizard creation
 * Create a class that extends Wizard. You'll have to implement `getPreviousScreen()`, `getNextScreen()` and `finish()` abstract methods.
-* Instantiate the wizard using its fluent builder (only the constructor arguments of the Builder class are mandatory, others methods like `icon()` are optional):
+* Instantiate the wizard using its fluent builder (only the constructor arguments of the Builder class are mandatory, all the others methods like `icon()` are optional):
 ````java
 MyWizard wizard = new Wizard(new Wizard.Builder("wizard name", ActionSelectionPanel.class,window)
    .hSize(600).vSize(500).locale(LocaleManager.getLocale()).icon(anIcon)
@@ -54,7 +54,7 @@ MyWizard wizard = new Wizard(new Wizard.Builder("wizard name", ActionSelectionPa
  * `icon()` method set the header left-side icon
  * `headerBackgroundImage()` adds an auto-resized image as header's background
  * `leftSideImage()` adds an image to be displayed as a left side panel. This image is automatically extended to fit all the available space. To avoid letting users to see this image being resized at first display, make sure to create an image than has the right dimension out of the box.
-* `finish()` method implements actions to be done at the end of the wizard
+* `finish()` method implements the actions to be done at the end of the wizard.
 * `getPreviousScreen()` and `getNextScreen()` have to return previous or next screen class :
 
 ````java
@@ -69,22 +69,22 @@ public Class getNextScreen(Class screen) {
 	}
 }
 ````
-* `show()` displays the wizard
+* `show()` displays the wizard.
 
 ### Screen creation
 * For each wizard page, create a public Screen class. You have to implement `initUI()`, `getDescription()` and `getName()` abstract methods.
-* `getName()` method should return the step name and getDescription() the step description (return null if no description needed).
-* `initUI()` method contains graphical code for your screen. This method is automatically called from screen constructor so don't call it by yourself.
+* `getName()` method should return the step name and getDescription() the step description (return `null` if none description required).
+* `initUI()` method contains graphical code for your screen. This method is automatically called from screen constructor, don't call it by yourself.
 
 ### Data sharing between screens and wizard
-Get and set wizard data using the `data` map available from wizard and screen classes. This is a `HashMap<Object,Object>` so you can use anything as a key. 
+Get and set wizard data using the `data` map available from wizard and screen classes. This is a `HashMap<Object,Object>` so you can use anything as a key or a value. 
 A good practice is to create an enum in the Wizard class and use to enum entry as key for the data map :
 ````java
 public Class MyWizard extends Wizard {
 	enum Variable {VARIABLE_1,VARIABLE_2}
 	...
 	void someMethod(){
-		data.put(Variable.VARIABLE1,"a fine example String");
+		data.put(Variable.VARIABLE1,"a String");
 	}
 }
 
@@ -96,16 +96,16 @@ public Class MyScreen extends Screen {
 ````
 ## General use
 * It is a good practice to create wizards and their associated screens in the same package. It's also better to implement screens in different java files.
-* Set errors using the `setProblem(String)` method. The error will be displayed in red to the user at the bottom of the screen. When error is fixed, use a `setProblem(null)`.
-* Use `setCanFinish(true)` method in a screen to set the fact that the screen is the last one (user can click on Finish button).
-* By default, QDwizard keeps screens into memory so user can go previous or next and keep typed values. If you want to clear this cache, use the `ClearPoint` annotation against your screen(s) classes. When user reaches a screen that use this annotation, the screens cache is cleaned up.
-* The Screen class contains two empty methods `onEnter()` and `onLeave()` which are called by the wizard respectively on entering and before leaving the screen. You can override them to add specific behaviors. Note that this happens only in forward mode, which means `onEnter()` won't be called when you return to a screen via the previous button and `onLeave()` won't be called when you leave the screen via the previous button.
+* Set errors using the `setProblem(String)` method. The error will be displayed in red at the bottom of the screen. When error is fixed, use a `setProblem(null)` to remove it.
+* Use `setCanFinish(true)` method in a screen to state the fact that this screen is the last one (user can click on Finish button).
 
 ##Advanced topics
-* By default, the Cancel button just close the wizard window. You can implement a `onCancel()` method in your wizard, which will be called when the user presses the Cancel button. This method should should return true to close the window or false if you want to keep it opened.
+* The Screen class contains two empty methods `onEnter()` and `onLeave()` which are called by the wizard respectively on entering and before leaving the screen. You can override them to add specific behaviors. Note that this happens only in forward mode, which means that `onEnter()` won't be called when you return to a screen via the previous button and that `onLeave()` won't be called when you leave the screen via the previous button.
+* By default, QDwizard keeps the screens (and its widgets models) into memory so user can go previous or next and keep typed values. If you want to clear this cache, use the `ClearPoint` annotation against your screen(s) classes. When user reaches a screen that use this annotation, the screens cache is cleaned up and the screens `initUI()` is called.
+* By default, the Cancel button just close the wizard window. You can implement a `Wizard.onCancel()` method which will be called when the user presses the Cancel button. This method should should return true to close the window or false if you want to keep it opened.
 * You can come with you own langpack if it is not provided natively by QDWizard or you can override an existing langpack using the `Langpack.addLocale()` method.
 * [from 4.2.0] You can call the `Screen.setCanGoNext(boolean)`, `Screen.setCanGoPrevious(boolean)`,`Screen.setCanCancel(boolean)` and `Screen.setCanFinish(boolean)` from your screen class as a way to force disabling of "Previous","Next", "Cancel" or "Finish" buttons on certain events.
-* [from 4.2.0] You can call the `Wizard.forceNextScreen()`, `Wizard.forcePreviousScreen()`, `Wizard.forceCancel()` and `Wizard.forceFinish()` to force programmatically the screen actions (without actual user clicking on the buttons). Beware that this action still follows the state of the screen (canGoNext, canGoPrev, canCancel, canFinish) and will have no effect if it is not the case. The same methods are available from the `Screen` classes.
+* [from 4.2.0] You can call the `Wizard.forceNextScreen()`, `Wizard.forcePreviousScreen()`, `Wizard.forceCancel()` and `Wizard.forceFinish()` to force programmatically the screen actions (without actual user clicking on the buttons). Beware that this action still follows the state of the screen (canGoNext, canGoPrev, canCancel, canFinish) and will have no effect if this condition is not fulfilled. The same methods are available from the `Screen` classes.
 
 ##Samples
 Have a look at [the Jajuk DJ wizard](https://github.com/jajuk-team/jajuk/blob/master/jajuk/src/main/java/org/jajuk/ui/wizard/digital_dj/DigitalDJWizard.java)
