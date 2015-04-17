@@ -241,7 +241,6 @@ public abstract class Screen extends JPanel {
 	 * Called by wizard before the screen is left. This happens only in forward
 	 * mode, which means {@code onLeave()} won't be called when you leave the
 	 * screen via the previous button.
-	 * <p>
 	 * 
 	 */
 	public void onLeave() {
