@@ -99,7 +99,7 @@ public Class MyScreen extends Screen {
 * Set errors using the `setProblem(String)` method. The error will be displayed in red to the user at the bottom of the screen. When error is fixed, use a `setProblem(null)`.
 * Use `setCanFinish(true)` method in a screen to set the fact that the screen is the last one (user can click on Finish button).
 * By default, QDwizard keeps screens into memory so user can go previous or next and keep typed values. If you want to clear this cache, use the `ClearPoint` annotation against your screen(s) classes. When user reaches a screen that use this annotation, the screens cache is cleaned up.
-* The Screen class contains two empty methods `onEnter()` and `onLeave()` which are called by the wizard respectively on entering and before leaving the screen. You can override them if you want your screens to be notified on enter or leave. Note that this happens only in forward mode, which means `onEnter()` won't be called when you return to a screen via the previous button and `onLeave()` won't be called when you leave the screen via the previous button.
+* The Screen class contains two empty methods `onEnter()` and `onLeave()` which are called by the wizard respectively on entering and before leaving the screen. You can override them to add specific behaviors. Note that this happens only in forward mode, which means `onEnter()` won't be called when you return to a screen via the previous button and `onLeave()` won't be called when you leave the screen via the previous button.
 
 ##Advanced topics
 * By default, the Cancel button just close the wizard window. You can implement a `onCancel()` method in your wizard, which will be called when the user presses the Cancel button. This method should should return true to close the window or false if you want to keep it opened.
@@ -114,10 +114,12 @@ Have a look at [the Jajuk DJ wizard](https://github.com/jajuk-team/jajuk/blob/ma
 Check http://bflorat.github.io/qdwizard/apidocs/
 
 # History
-* 2015/04/10: [4.2.0] (backward compatible)
+* 2015/04/10: [5.0.0] (some methods removed)
  * Several bugfixes, check https://github.com/bflorat/qdwizard/issues
  * Added programmatical actions on wizards and screens like `forceNextScreen()` (thx Boformer)
- * setCanGoNext() and setCanGoPrevious() methods are now public and be overriden in screens (thx Boformer)
+ * `setCanGoNext()` and `setCanGoPrevious()` methods are now public and be overriden in screens (thx Boformer)
+ * `Screen.onCancelled()` and `Screen.onFinished()` methods removed (should use `Wizard.onCancel()` and `Wizard.finish()` instead))
+ * `Screen.onNext()` method has been replaced by the `onLeave()` method.
 * 2014/03/28: [4.1.0] (backward compatible)
  * It is now possible to add or override a langpack using the `Langpack.addLocale()` method
 * 2014/03/28: [4.0.0] (backward compatibility slightly broken at runtime only)

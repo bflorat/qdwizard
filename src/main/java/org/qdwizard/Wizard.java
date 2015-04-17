@@ -53,9 +53,10 @@ import javax.swing.WindowConstants;
  * getPreviousScreen(), getNextScreen() and finish() abstract methods
  * </p>
  * Displaying the wizard:
- *
+ * 
  * <pre>
- * {@code
+ * {
+ * 	&#064;code
  * 	MyWizard wizard = new Wizard(new Wizard.Builder(&quot;wizard name&quot;, ActionSelectionPanel.class,
  * 			window).hSize(600).vSize(500).locale(LocaleManager.getLocale()).icon(anIcon));
  * 	wizard.show();
@@ -399,18 +400,15 @@ public abstract class Wizard extends WindowAdapter implements ActionListener {
 			} else if (NEXT_ACTION.equals(ae.getActionCommand())) {
 				// only go to next screen if onNext() of current screen
 				// returns true
-				if (current.onNext()) {
-					setScreen(getNextScreen(current.getClass()));
-					current.onEnter();
-				}
+				current.onLeave();
+				setScreen(getNextScreen(current.getClass()));
+				current.onEnter();
 			} else if (CANCEL_ACTION.equals(ae.getActionCommand())) {
-				current.onCancelled();
 				data.clear();
 				bCancelled = true;
 				onCancel();
 				dialog.dispose();
 			} else if (FINISH_ACTION.equals(ae.getActionCommand())) {
-				current.onFinished();
 				finish();
 				dialog.dispose();
 			}

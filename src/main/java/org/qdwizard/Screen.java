@@ -28,16 +28,19 @@ import javax.swing.JPanel;
  * A wizard screen
  * <ul>
  * <li>For each wizard page, create a public Screen class. You have to implement
- * initUI(), getDescription() and getName() abstract methods.</li>
- * <li>getName() method should return the step name and getDescription() the
- * step description (return null if no description needed).</li>
- * <li>initUI() method contains graphical code for your screen. This method is
- * automatically called from screen constructor so don't call it.</li>
+ * initUI(), getDescription() and getName() abstract mandatory methods.</li>
+ * <li>{@code getName()} method should return the step name and
+ * {@code getDescription()} the step description (can return null if no
+ * description is required).</li>
+ * <li>{@code initUI()} method contains graphical code for your screen. This
+ * method is automatically called from screen constructor, you shouldn't call it
+ * directly.</li>
  * </ul>
  */
 public abstract class Screen extends JPanel {
 	/** Generated serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	/** The state of the screen */
 	private final ScreenState state;
 	/** Data is shared with wizard scope */
 	public Map<Object, Object> data;
@@ -68,7 +71,7 @@ public abstract class Screen extends JPanel {
 	abstract public String getName();
 
 	/**
-	 * Gie here the screen description (can be null)
+	 * Give here the screen description (can be null)
 	 * 
 	 * @return screen description
 	 */
@@ -78,7 +81,7 @@ public abstract class Screen extends JPanel {
 	 * Can finish.
 	 * 
 	 * 
-	 * @return true if...
+	 * @return true if this is the last screen.
 	 */
 	boolean canFinish() {
 		// Can finish only if none problem
@@ -172,7 +175,7 @@ public abstract class Screen extends JPanel {
 	}
 
 	/**
-	 * Get current problem.
+	 * Get current problem if any (or null if none problem)
 	 * 
 	 * @return the current problem
 	 */
@@ -187,8 +190,8 @@ public abstract class Screen extends JPanel {
 
 	/**
 	 * Called by wizard before the screen is displayed. This happens only in
-	 * forward mode, which means onEnter won't be called when you return to a
-	 * screen via the previous button.
+	 * forward mode, which means {@code onEnter()} won't be called when you
+	 * return to a screen via the previous button.
 	 */
 	public void onEnter() {
 		// Do nothing by default
@@ -236,38 +239,17 @@ public abstract class Screen extends JPanel {
 
 	/**
 	 * Called by wizard before the screen is left. This happens only in forward
-	 * mode, which means onLeave won't be called when you leave the screen via
-	 * the previous button.
+	 * mode, which means {@code onLeave()} won't be called when you leave the
+	 * screen via the previous button.
 	 * <p>
 	 * 
-	 * @return return true if the Wizard should display the next screen return
-	 *         false if the Wizard should stay on the current screen
 	 */
-	public boolean onNext() {
+	public void onLeave() {
 		// Does nothing by default
-		return true;
 	}
 
 	/**
-	 * Called by wizard when the wizard is being canceled. Override this
-	 * function to clean up (like stop any threads that this Screen might have
-	 * created)
-	 */
-	public void onCancelled() {
-		// does nothing by default
-	}
-
-	/**
-	 * Called by wizard when the wizard is closing because the Finish button was
-	 * pressed. Override this function to clean up (like stop any threads that
-	 * this Screen might have created)
-	 */
-	public void onFinished() {
-		// does nothing by default
-	}
-
-	/**
-	 * Ask for GUI refresh
+	 * Ask for a GUI refresh
 	 * 
 	 */
 	private void notifyGUI() {
