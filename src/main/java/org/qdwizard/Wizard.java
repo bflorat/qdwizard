@@ -153,19 +153,19 @@ public abstract class Wizard extends WindowAdapter implements ActionListener {
 	private boolean bCancelled;
 	private final int layoutHPadding;
 	private final int layoutVPadding;
-
-	private static final int GUI_TIMER_INTERVAL_MILLIS = 100;
+	/** Timer delay */
+	private static final int REFRESH_TIMER_INTERVAL_MILLIS = 100;
 
 	/** This timer perform actions required by setting the RESERVED_DATA flags */
-	private Timer refreshGUITimer = new Timer(GUI_TIMER_INTERVAL_MILLIS, new ActionListener() {
+	private Timer refreshGUITimer = new Timer(REFRESH_TIMER_INTERVAL_MILLIS, new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			synchronized (data) {
-				// Only one action at each loop
 				Boolean updateGui = (Boolean) data.get(Utils.RESERVED_DATA.UPDATE_GUI);
 				if (updateGui != null && updateGui) {
 					updateGUIState();
 					data.put(Utils.RESERVED_DATA.UPDATE_GUI, false);
+					// Only one single action at each loop, we return
 					return;
 				}
 				Boolean nextScreen = (Boolean) data.get(Utils.RESERVED_DATA.FORCED_NEXT_SCREEN);
