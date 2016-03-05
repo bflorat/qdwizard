@@ -115,7 +115,7 @@ Check http://bflorat.github.io/qdwizard/apidocs/
 
 # History
 * 2016/03/05: [5.0.1] (some methods removed)
- * Fixed license in source (LGPL, not GPL) + added a LGPL license notice along woth the sources
+ * Fixed license in source (LGPL, not GPL) + added a LGPL license notice along with the sources
 * 2015/04/10: [5.0.0] (some methods removed)
  * Several bugfixes, check https://github.com/bflorat/qdwizard/issues
  * Added programmatical actions on wizards and screens like `forceNextScreen()` (thx Boformer)
