@@ -5,7 +5,7 @@
 	<artifactId>qdwizard</artifactId>
 	<name>QDWizard</name>
 	<packaging>jar</packaging>
-	<version>5.0.0</version>
+	<version>5.0.1</version>
 	<url>http://github.com/bflorat/qdwizard</url>
 	<licenses>
 		<license>
